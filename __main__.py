@@ -5,6 +5,7 @@
 import time
 from commands import *
 import speech_recognition as sr
+from playsound import playsound
 
 
 # this is called from the background thread
@@ -14,6 +15,7 @@ def callback(recognizer, audio):
         speech = recognizer.recognize_google(audio).lower()
         print("Google Speech Recognition thinks you said " + speech)
         if speech in commandsDict:
+            playsound("sounds/ok.mp3")
             commandsDict[speech]()
     except sr.UnknownValueError:
         print("Google Speech Recognition could not understand audio")
@@ -35,11 +37,15 @@ stop_listening = r.listen_in_background(m, callback)
 # `stop_listening` is now a function that, when called, stops background listening
 
 commandsDict = {"computer open jackass": jackass, 
+                "computer turn on jackass": jackass,
                 
                 # it LOVES to read "jackass" as "jack" in this specific sentence so i gotta put both jic
                 "computer open jack": jackass,
+                "computer turn on jack": jackass,
 
                 "computer open vinny": vinny,
+                "computer turn on vinny": vinny,
+
                 "stop listening": kill}
 
 # keep thread alive
