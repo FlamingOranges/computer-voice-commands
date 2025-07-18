@@ -9,7 +9,7 @@ no executable file yet, just run main and have a mic hooked up. it starts listen
 
 # commands
 
-**computer open jackass**: opens twitch/tv/coney
+**computer open jackass**: opens twitch.tv/coney
 
 **computer open vinny**: opens twitch.tv/vinesauce
 
