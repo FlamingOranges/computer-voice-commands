@@ -38,7 +38,8 @@ commandsDict = {"computer open jackass": jackass,
                 
                 # it LOVES to read "jackass" as "jack" in this specific sentence so i gotta put both jic
                 "computer open jack": jackass,
-                
+
+                "computer open vinny": vinny,
                 "stop listening": kill}
 
 # keep thread alive
