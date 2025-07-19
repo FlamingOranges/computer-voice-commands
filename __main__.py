@@ -2,10 +2,16 @@
 
 # NOTE: this example requires PyAudio because it uses the Microphone class
 
-import time
+# TODO: maybe add fuzzy matching
+
+
+import time, os, glob
 from commands import *
 import speech_recognition as sr
 from playsound import playsound
+
+basedir = os.path.dirname(os.path.abspath(__file__))
+shortcutpath = os.path.join(basedir, "shortcuts")
 
 
 # this is called from the background thread
@@ -14,9 +20,10 @@ def callback(recognizer, audio):
     try:
         speech = recognizer.recognize_google(audio).lower()
         print("Google Speech Recognition thinks you said " + speech)
-        if speech in commandsDict:
+        if speech in shortcuts:
             playsound("sounds/ok.mp3")
-            commandsDict[speech]()
+            
+            os.system(glob.glob(shortcutpath + "\\" + shortcuts[speech] + ".*")[0])
     except sr.UnknownValueError:
         print("Google Speech Recognition could not understand audio")
     except sr.RequestError as e:
@@ -36,17 +43,31 @@ with m as source:
 stop_listening = r.listen_in_background(m, callback)
 # `stop_listening` is now a function that, when called, stops background listening
 
-commandsDict = {"computer open jackass": jackass, 
-                "computer turn on jackass": jackass,
-                
-                # it LOVES to read "jackass" as "jack" in this specific sentence so i gotta put both jic
-                "computer open jack": jackass,
-                "computer turn on jack": jackass,
+shortcuts = {
+    "computer open jackass": "jackass",
+    "computer turn on jackass": "jackass",
+    
+    # it LOVES to read "jackass" as "jack" in this specific sentence so i gotta put both jic
+    "computer open jack": "jackass",
+    "computer turn on jack": "jackass",
 
-                "computer open vinny": vinny,
-                "computer turn on vinny": vinny,
+    "computer open vinny": "vinny",
+    "computer turn on vinny": "vinny",
 
-                "stop listening": kill}
+    "computer turn on youtube": "youtube",
+
+    "computer open trimmer": "trimmer",
+
+    "computer let's go gambling": "gambling",
+    "computer let's go gam": "gambling",
+
+    "computer open hsr": "hsr",
+
+    "computer the other one": "other",
+
+    "stop listening": kill
+}
+
 
 # keep thread alive
 while True:
