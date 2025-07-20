@@ -8,20 +8,4 @@ no executable file yet, just run main and have a mic hooked up. it starts listen
 
 create a folder called "shortcuts" within the main folder. 
 
-
-# commands
-### place shortcut files in here yourself nerd. name them appropriately
-
-**computer open jackass**: opens twitch.tv/coney
-shortcut name: jackass.url
-
-**computer open vinny**: opens twitch.tv/vinesauce
-shortcut name: vinny.url
-
-**computer open trimmer**: opens my video trimmer
-shortcut name: trimmer.lnk
-
-**computer let's go gambling**: opens buckshot roulette
-shortcut name: buckshot.lnk
-
-**stop listening**: kills the process
+i dont know why youd install this. maybe ill make a version one day that lets you make your own shortcuts and commands

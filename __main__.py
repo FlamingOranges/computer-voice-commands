@@ -6,7 +6,7 @@
 
 
 import time, os, glob
-from commands import *
+
 import speech_recognition as sr
 from playsound import playsound
 
@@ -20,16 +20,20 @@ def callback(recognizer, audio):
     try:
         speech = recognizer.recognize_google(audio).lower()
         print("Google Speech Recognition thinks you said " + speech)
-        if speech in shortcuts:
-            playsound("sounds/ok.mp3")
-            
-            os.system(glob.glob(shortcutpath + "\\" + shortcuts[speech] + ".*")[0])
+        if "computer" in speech:
+            keyword = speech[speech.index("computer"):]
+            if keyword in shortcuts:
+                playsound("sounds/ok.mp3")
+                
+                os.system(glob.glob(shortcutpath + "\\" + shortcuts[keyword] + ".*")[0])
+            else:
+                playsound("sounds/no.mp3")
     except sr.UnknownValueError:
         print("Google Speech Recognition could not understand audio")
     except sr.RequestError as e:
         print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
-# stops the listening and kills the file
+# stops the listening and kills the process
 def kill(): 
     stop_listening(wait_for_stop=False)
     os._exit(1)
@@ -64,6 +68,11 @@ shortcuts = {
     "computer open hsr": "hsr",
 
     "computer the other one": "other",
+    
+    "computer clip that":  "clip",
+
+    "computer start recording": "record",
+    "computer stop recording": "record",
 
     "stop listening": kill
 }
